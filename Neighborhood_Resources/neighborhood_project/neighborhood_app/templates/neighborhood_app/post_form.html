@@ -1,0 +1,13 @@
+{% extends "neighborhood_app/base.html" %}
+{% block content %}
+<p></p>
+<h1>New Review</h1>
+  <form method="POST" class="post-form">
+    {% csrf_token %} 
+    {{form.as_p}}
+    <button type="submit" class='save btn btn-primary' name="button">Save</button>
+  </form>
+
+  <script>var editor = new MediumEditor('.editable');</script>
+
+{% endblock %}

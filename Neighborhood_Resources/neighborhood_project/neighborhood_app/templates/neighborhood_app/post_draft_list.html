@@ -1,0 +1,11 @@
+{% extends "neighborhood_app/base.html" %}
+
+{% block content %}
+{% for post in draft_post %}
+        <div class="post">
+            <h1><a href="{% url 'neighborhood_app:post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p class="date"><b>Created: {{ post.create_date|date:'d-m-Y' }}</b></p>
+            <p>{{ post.text|safe|truncatechars:200 }}</p>
+        </div>
+{% endfor %}
+{% endblock %}

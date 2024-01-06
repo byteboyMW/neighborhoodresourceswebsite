@@ -1,0 +1,18 @@
+{% extends "neighborhood_app/base.html" %}
+{% block content%}
+<p></p>
+    <h2>Please Login:</h2>
+    <p></p>
+    <h4> (Only available to admins) </h4>
+    <p></p>
+    {% if form.errors %}
+    <p> Your username and password didn't match! Please try again. </p>
+    {% endif %}
+
+    <form action="{% url 'login' %}" method="POST">
+        {%csrf_token%}
+        {{form.as_p }}
+        <input type="submit" class='btn btn-primary' value="Login"></input>
+        <input type="hidden" name="next" value="{{next}}"></input>
+    </form>
+{% endblock %}

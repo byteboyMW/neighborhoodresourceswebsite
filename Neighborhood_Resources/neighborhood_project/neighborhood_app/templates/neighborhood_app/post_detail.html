@@ -1,0 +1,42 @@
+{% extends "neighborhood_app/base.html" %}
+{% block content %}
+<div class="container-fluid">
+  <p></p>
+  <div class="posttitle">
+  <h1>"{{post.title}}" by {{post.author}}</h1>
+  </div>
+  {% if post.published_date %}
+  <b>{{ post.published_date }}</b>
+    <p></p>
+  {% else %}
+  <a class="btn btn-primary" href="{% url 'neighborhood_app:post_publish' pk=post.pk %}">Publish</a>
+  {% endif %}
+  <p></p>  
+  <p class='postcontent'>{{post.text|safe|linebreaksbr}}</p>
+
+  {% if user.is_authenticated %}
+    <a class='btn btn-primary' href="{% url 'neighborhood_app:post_edit' pk=post.pk%}">Edit</a>
+    <a class='btn btn-primary' href="{% url 'neighborhood_app:post_remove' pk=post.pk%}">Remove</a>
+  {% endif %}
+
+  <a class='btn btn-primary' href="{% url 'neighborhood_app:add_comment_to_post' pk=post.pk %}">Add Comment</a>
+
+  <hr>
+
+  <div class="container-fluid">
+
+    {% for comment in post.comments.all%}
+    <br>
+       {{comment.created_date}}
+          <h3><b>Posted by: {{comment.author}}</b></h3>
+          <h4>{{comment.text|safe|linebreaks}}</h4>
+          {% if user.is_authenticated%}
+            <a class='btn btn-primary' href="{% url 'neighborhood_app:comment_remove' pk=comment.pk%}">Trash</a>
+          {% endif %}
+          <p></p>
+      {% empty %}
+      <p>No comments yet.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

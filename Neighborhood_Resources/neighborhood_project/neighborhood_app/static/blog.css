@@ -1,0 +1,12 @@
+.posttitle{
+  font-size: 3em;
+}
+
+.postcontent{
+  font-size: 1.25em;
+}
+
+.btn-comment{
+  position: absolute;
+  right: 0px;
+}
